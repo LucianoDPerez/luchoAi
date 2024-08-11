@@ -1,2 +1,5 @@
 
 .DS_Store
+/back/node_modules
+/back/vendor
+/back/packages/clima/vendor/
