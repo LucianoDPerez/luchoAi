@@ -17,13 +17,13 @@ class OpenAiAction implements ActionInterface
         $data = $request->all();
 
         try {
-            $key = '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';
+            $key = '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';
             $client = OpenAI::client($key);
 
             $response = $client->chat()->create([
-                'model' => 'gpt-3.5-turbo',
+                'model' => 'gpt-4o-mini', //gpt-3.5-turbo
                 'messages' => [
-                    ['role' => 'user', 'content' => $data['text']]
+                    ['role' => 'user', 'content' => $data['city'] . ' ' . $data['text']]
                 ],
             ]);
 
@@ -33,7 +33,7 @@ class OpenAiAction implements ActionInterface
 
                 return response()->json([
                     'message' => $responseText,
-                    'found' => true], 200);
+                    'found' => true, 'action' => false], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Exception occurred: ' . $e->getMessage()], 500);
         }

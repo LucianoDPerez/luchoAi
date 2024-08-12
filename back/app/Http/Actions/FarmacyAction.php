@@ -12,11 +12,12 @@ class FarmacyAction implements ActionInterface
 {
     public function execute(Request $request)
     {
+        $data = $request->all();
         try {
             $client = new Client();
 
             $apiKey = 'AIzaSyBNYYbPqi-YxfPRzVTGivmi8oUBY_j-kxA';
-            $query = 'farmacias de turno en victoria, entre rios';
+            $query = $data['city'] . '  farmacias';
 
             $response = $client->get('https://maps.googleapis.com/maps/api/place/textsearch/json', [
                 'query' => [
@@ -39,7 +40,9 @@ class FarmacyAction implements ActionInterface
 
                 return response()->json([
                     'message' => "Encontre las siguientes farmacias en tu ubicacion \n" . $responseText,
-                    'found' => true], 200);
+                    'found' => true,
+                    'action' => true
+                ], 200);
 
 
         } catch (\Exception $e) {

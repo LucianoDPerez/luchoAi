@@ -16,8 +16,13 @@ class WeatherAction implements ActionInterface
         $weather = new Clima();
         $returnWeather = $weather->getCurrentWeather(Str::ascii($data['city']));
 
+        Log::info(json_encode($returnWeather));
         return response()->json([
-            'message' => 'El pronostico para ' . $data['city'] . ' es: ' . $returnWeather->temp,
-            'found' => true], 200);
+            'message' => 'El pronostico para ' . $data['city'] . " es: \n" .
+                            'Temperatura actual: ' . $returnWeather->temp . "\n" .
+                            'Temperatura minima: ' . $returnWeather->temp_min . "\n" .
+                            'Temperatura maxima: ' . $returnWeather->temp_max . "\n" .
+                            'Porcentaje humedad: ' . $returnWeather->humidity,
+            'found' => true, 'action' => true], 200);
     }
 }

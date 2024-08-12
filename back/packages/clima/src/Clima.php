@@ -1,6 +1,6 @@
 <?php
 
-namespace BlackboxAi\Clima;
+namespace Blackboxai\Clima;
 
 use Illuminate\Support\Facades\Log;
 use RakibDevs\Weather\Weather as RakibDevsWeather;

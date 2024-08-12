@@ -28,7 +28,7 @@ class DollarAction implements ActionInterface
 
                 return response()->json([
                     'message' => "Las Cotizaciones del dolar son las siguiente: \n" . $responseText,
-                    'found' => true], 200);
+                    'found' => true, 'action' => true], 200);
 
             } else {
                 return response()->json(['error' => 'Error fetching data'], $response->status());

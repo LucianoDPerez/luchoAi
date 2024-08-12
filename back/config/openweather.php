@@ -55,7 +55,7 @@ return [
     'lang' => env('OPENWAETHER_API_LANG', 'es'),
     'date_format' => 'd/m/Y',
     'time_format' => 'h:i A',
-    'day_format' => 'c',
+    'day_format' => 'l',
 
     /**
      * Unit Configuration
