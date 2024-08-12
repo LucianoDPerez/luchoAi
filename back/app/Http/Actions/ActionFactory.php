@@ -18,6 +18,11 @@ class ActionFactory
         'dollar' => DollarAction::class,
 
         'farmacia' => FarmacyAction::class,
+
+        'comprar' => ShopAction::class,
+        'compras' => ShopAction::class,
+        'shop' => ShopAction::class,
+
         // Agrega más acciones aquí
     ];
 
