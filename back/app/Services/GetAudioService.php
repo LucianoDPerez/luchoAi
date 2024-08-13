@@ -20,22 +20,27 @@ class GetAudioService
 
         $output = [];
         $resultCode = null;
-        exec($command, $output, $resultCode);
 
-        if ($resultCode !== 0) {
-            return response()->json(['message' => 'Error ejecutando el comando de whisper'], 404);
+        $result = exec($command, $output, $resultCode);
+
+        if (!$result && $resultCode !== 0) {
+            return response()->json(['message' => 'Error ejecutando el comando de whisper', 'found' => true, 'action' => false], 200);
         }
 
-        $transcription = substr(implode("\n", $output), strpos(implode("\n", $output), ']') + 1);
+        $text = substr(implode("\n", $output), strpos(implode("\n", $output), ']') + 1);
+
+        Log::info($text);
+
+        $request->merge(['text' => $text]);
 
         // Llamar a la acción correspondiente
         $actionFactory = new ActionFactory();
-        $action = $actionFactory->getAction($transcription);
+        $action = $actionFactory->getAction($text);
 
         if ($action) {
             return $action->execute($request);
         } else {
-            return response()->json(['message' => $transcription, 'found' => false], 200);
+            return response()->json(['message' => 'Error ejecutando el comando de whisper', 'found' => true, 'action' => false], 200);
         }
     }
 

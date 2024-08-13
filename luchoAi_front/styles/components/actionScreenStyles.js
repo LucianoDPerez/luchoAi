@@ -5,9 +5,9 @@ const actionScreenStyles = StyleSheet.create({
     welcomeContainer: {
       backgroundColor: '#FFF5E6',
       borderRadius: 12,
-      padding: 20,
+      padding: 4,
       marginHorizontal: 6,
-      marginVertical: 10,
+      marginVertical: 2,
       shadowColor: '#000',
       shadowOffset: {
         width: 0,

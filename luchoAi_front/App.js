@@ -5,10 +5,11 @@ import { getCurrentLocation, fetchCityFromLocation } from './services/location';
 import { requestMicrophonePermission, startRecording, checkWebCompatibility } from './services/audio';
 import Input from "./components/input";
 import ActionsScreen from "./components/actions";
-import Message from './components/message';
+
 import { sendText, sendAudioToWhisper } from "./services/chatbot-api";
 
-import { getGeminiResponse } from "./components/response";
+import Message from "./components/message";
+
 
 export default function App() {
   const [listData, setListData] = useState([]);
@@ -69,22 +70,23 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require("./assets/icons/robot1.png")} style={styles.icon} />
-        <Text style={styles.headerText}>LuchoTest Gemini AI</Text>
+        <Text style={styles.headerText}>LuchoTest OpenAI</Text>
       </View>
-
-      <ActionsScreen onEnter={handleSubmitText} />
-
+  
+      <View>
+        <ActionsScreen onEnter={handleSubmitText} />
+      </View>
+        
       <FlatList
-        style={{ paddingHorizontal: 16, marginBottom: 80 }}
+        style={{ flex: 1, paddingHorizontal: 16 }}
         data={listData}
-        renderItem={({ item }) => (
-          <View>
-            <Message message={item.text} author={item.author} />
-          </View>
-        )}
+        renderItem={({ item }) => {
+          if (!item) return null; // Add this check
+          return <Message message={item} onEnter={handleSubmitText} />;
+        }}
         keyExtractor={(item, index) => index.toString()}
-      />
-
+    />
+  
       <Input
         onSubmit={handleSubmitText}
         onStartRecording={handleStartRecording}

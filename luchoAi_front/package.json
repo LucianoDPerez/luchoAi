@@ -25,6 +25,7 @@
     "react-native": "^0.73.5",
     "react-native-asset": "^2.1.1",
     "react-native-markdown-display": "^7.0.2",
+    "react-native-render-html": "^6.3.4",
     "react-native-safe-area-context": "4.8.2",
     "react-native-voice": "^0.3.0",
     "react-native-web": "^0.19.6"

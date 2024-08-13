@@ -17,6 +17,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/whisper', [AssistantController::class, '__invoke']);
 Route::post('/text', [AssistantController::class, '__invoke']);
 
+Route::post('/alimentos', [AssistantController::class, '__invoke']);
+
+
 Route::post('/blackbox', [BlackboxController::class, 'blackbox']);
 
 Route::post('/google/auth', [GoogleController::class, 'auth']);

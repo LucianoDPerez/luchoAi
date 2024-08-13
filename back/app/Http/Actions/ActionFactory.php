@@ -2,6 +2,9 @@
 
 namespace App\Http\Actions;
 
+use App\Http\Actions\shop\ElectronicAction;
+use App\Http\Actions\shop\FoodAction;
+use App\Http\Actions\shop\VestimentaAction;
 use App\Http\Controllers\Api\ActionInterface;
 use Illuminate\Support\Facades\Log;
 
@@ -23,6 +26,9 @@ class ActionFactory
         'compras' => ShopAction::class,
         'shop' => ShopAction::class,
 
+        'alimentos' => FoodAction::class,
+        'vestimenta' => VestimentaAction::class,
+        'electrodomesticos' => ElectronicAction::class,
         // Agrega más acciones aquí
     ];
 
@@ -30,6 +36,7 @@ class ActionFactory
 
     public function getAction(string $transcription)
     {
+
         foreach ($this->actions as $keyword => $actionClass) {
             if (str_contains(strtolower($transcription), strtolower($keyword))) {
                 return new $actionClass();

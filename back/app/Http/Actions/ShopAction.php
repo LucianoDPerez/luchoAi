@@ -12,13 +12,12 @@ class ShopAction implements ActionInterface
     public function execute(Request $request)
     {
         try {
-
                 return response()->json([
-                    'message' => "Que quieres comprar? \n",
+                    'message' => "Que quieres comprar? \n \n",
                     'categories' => [
-                        ['name' => 'Alimentos', 'url' => 'https://example.com/alimentos'],
-                        ['name' => 'Vestimenta', 'url' => 'https://example.com/vestimenta'],
-                        ['name' => 'Electrodomesticos', 'url' => 'https://example.com/electrodomesticos'],
+                        ['name' => 'ALIMENTOS', 'url' => 'alimentos'],
+                        ['name' => 'VESTIMENTA', 'url' => 'vestimenta'],
+                        ['name' => 'ELECTRODOMESTICOS', 'url' => 'electrodomesticos'],
                     ],
                     'found' => true, 'action' => true], 200);
 
