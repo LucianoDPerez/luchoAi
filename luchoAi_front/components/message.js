@@ -81,13 +81,15 @@ export default function Message({ message, author, onEnter }) {
             <FlatList
                 data={message.values}
                 renderItem={({ item }) => (
-                    <View>
+                    <View style={{ marginBottom: 10 }}>
                         <FlatList
                           data={Object.entries(item)}
-                          renderItem={({ item: [key, value] }) => (
-                            <Text>
-                              {key}: {value}
-                            </Text>
+                          renderItem={({ item: [key, value], index }) => (
+                            <View >
+                              <Text style={index === 0 ? { fontWeight: 'bold' } : {}}>
+                                  {key} {value}
+                              </Text>
+                            </View>
                           )}
                           keyExtractor={(item, index) => index.toString()}
                         />

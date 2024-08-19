@@ -47,12 +47,12 @@ class WeatherAction implements ActionInterface
         $currentWeather = $weatherData['days'][0];
 
         return response()->json([
-            'message' => "El lalalala para {$data['city']} es:",
+            'message' => "El temperatura de hoy en {$data['city']} es:",
             'values' => [[
-                'actual' => $currentWeather['temp'],
-                'min' => $currentWeather['tempmin'],
-                'max' => $currentWeather['tempmax'],
-                'humidity' => $currentWeather['humidity'],
+                'Temperatura actual: ' => $currentWeather['temp'] . " °c",
+                'Temperatura minima: ' => $currentWeather['tempmin']  . " °c",
+                'Temperatura maxima: ' => $currentWeather['tempmax'] . " °c",
+                'Porcentaje de humedad: ' => $currentWeather['humidity'] . " %",
             ]],
             'found' => true,
             'action' => true,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, FlatList, Image, Alert, Platform } from "react-native";
+import { Text, View, FlatList, Image, Alert, Platform,SectionList } from "react-native";
 import styles from './styles/styles';
 import { getCurrentLocation, fetchCityFromLocation } from './services/location';
 import { requestMicrophonePermission, startRecording, checkWebCompatibility } from './services/audio';
@@ -66,6 +66,16 @@ export default function App() {
     }
   };
 
+  const sections = listData.reduce((acc, item) => {
+    const section = acc.find((section) => section.title === item.author);
+    if (!section) {
+      acc.push({ title: item.author, data: [item] });
+    } else {
+      section.data.push(item);
+    }
+    return acc;
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -78,7 +88,7 @@ export default function App() {
       </View>
         
       <FlatList
-        style={{ flex: 1, paddingHorizontal: 16 }}
+        style={{ flex: 1, paddingHorizontal: 16, marginBottom: 85 }}
         data={listData}
         renderItem={({ item }) => {
           if (!item) return null; // Add this check

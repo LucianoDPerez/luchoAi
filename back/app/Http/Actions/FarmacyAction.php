@@ -47,10 +47,10 @@ class FarmacyAction implements ActionInterface
 
                 if ($responseJson && isset($responseJson['result'])) {
                     $placesReturn[]=[
-                        'name' => "💊 " . $responseJson['result']['name'],
-                        'address' => "📍 " . $responseJson['result']['formatted_address'],
-                        'phone' => " 📞 " . ($responseJson['result']['formatted_phone_number'] ?? ' -- '),
-                        'opening' => " Abierto ahora:  " . (($responseJson['result']['opening_hours'] ?? [])['open_now'] ?? false ? 'SI' : 'NO')
+                        '💊 ' =>  $responseJson['result']['name'],
+                        '📍 ' =>  $responseJson['result']['formatted_address'],
+                        '📞 ' =>  ($responseJson['result']['formatted_phone_number'] ?? ' -- '),
+                        'Abierto ahora: ' =>  (($responseJson['result']['opening_hours'] ?? [])['open_now'] ?? false ? 'SI' : 'NO')
                     ];
                 } else {
                     Log::error('Error al obtener detalles del lugar: ' . $responseBody);
