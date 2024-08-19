@@ -1,3 +1,4 @@
+import { group } from "console";
 import { getGeminiResponse } from "../components/response";
 
 const handleApiResponse = async (response, setListData, inputText) => {
@@ -13,6 +14,8 @@ const handleApiResponse = async (response, setListData, inputText) => {
     setListData((prevList) => [...prevList, {
       text: apiResponse.message,
       categories: apiResponse.categories,
+      group: apiResponse.group,
+      values: apiResponse.values,
       author: 'api',
       prompt: inputText
     }]); 

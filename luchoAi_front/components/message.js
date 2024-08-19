@@ -20,6 +20,9 @@ export default function Message({ message, author, onEnter }) {
     iconSource = require("../assets/icons/user.png");
   }
 
+  console.log('El MENSAJE ES ...');
+  console.log(message.values);
+
   const formatTime = (time) => {
     return time < 10 ? `0${time}` : time;
   };
@@ -72,9 +75,32 @@ export default function Message({ message, author, onEnter }) {
           />
         </View>
       ) : null}
-    </View>
-  );
-}
+
+      {message.group && message.values  ? (        
+          <View>
+            <FlatList
+                data={message.values}
+                renderItem={({ item }) => (
+                    <View>
+                        <FlatList
+                          data={Object.entries(item)}
+                          renderItem={({ item: [key, value] }) => (
+                            <Text>
+                              {key}: {value}
+                            </Text>
+                          )}
+                          keyExtractor={(item, index) => index.toString()}
+                        />
+                    </View>
+                  )}
+              keyExtractor={(item, index) => index.toString()}
+              />
+           </View>      
+        ) : null}
+        
+    </View>   
+)}
+
 
 const styles = StyleSheet.create({
   message: {
