@@ -1,12 +1,10 @@
-// styles/styles.js
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 16,
     paddingTop: 10,
-    ackgroundColor: '#4A90E2',
+    backgroundColor: '#4A90E2', // Corrigido el error tipográfico
   },
   header: {
     flexDirection: 'row',
@@ -16,17 +14,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#4A90E2', // Un azul vibrante
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
   },
   icon: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     marginRight: 12,
   },
   headerText: {
@@ -47,16 +42,29 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 32,
     paddingVertical: 16,
-    gap: 8,
+    // Removido gap y gestionado con padding
   },
   input: {
     backgroundColor: '#fff',
-    width: '100%',
+    width: '90%',
     fontSize: 16,
     paddingVertical: 16,
-    paddingHorizontal: 24,
+    paddingHorizontal: 16,
     borderRadius: 32,
     borderWidth: 0.1,
+    alignSelf: 'center',
+  },
+  // Añadir márgenes a los mensajes en el FlatList
+  message: {
+    marginVertical: 8,
+    padding: 12,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 2,
   },
 });
 

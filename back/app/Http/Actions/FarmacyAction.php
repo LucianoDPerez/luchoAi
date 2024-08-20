@@ -59,30 +59,13 @@ class FarmacyAction implements ActionInterface
 
             $placesTest = $placesReturn;
 
-            $places = $placesTest;
+            //$places = $placesTest;
 
-            Log::debug(json_encode($placesTest));
-            //***********************************************************************************
-            /*$formattedText = array_map(function ($rate) {
-                return " 🩹💊 " .($rate['name'] ?? '**') . "\n" .
-                    " 📍 " . ($rate['formatted_address'] ?? '**') . "\n" .
-                    " 📞 " . ($rate['formatted_phone_number'] ?? ' -- ') . "\n" .
-                    " Abierto ahora:  " . (($rate['opening_hours'] ?? [])['open_now'] ?? false ? 'SI' : 'NO') . "\n"
-                    ;
-            }, $places['results']); //results*/
+           // Log::debug(json_encode($placesTest));
 
-            // Unir los textos y devolver como respuesta
-                //$responseText = implode("\n\n", $formattedText);
 
             $message = "Encontre las siguientes farmacias en tu ubicacion \n";
 
-            /*foreach ($placesTest['results'] as $place) {
-                $message .= $place['name'] . "\n";
-                $message .= $place['address'] . "\n";
-                $message .= $place['phone'] . "\n";
-                $message .= "Abierto ahora: " . $place['opening'] . "\n\n";
-            }
-*/
             return response()->json([
                 'message' => $message,
                 'values' => $placesTest,

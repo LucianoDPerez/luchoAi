@@ -36,7 +36,6 @@ class ActionFactory
 
     public function getAction(string $transcription)
     {
-
         foreach ($this->actions as $keyword => $actionClass) {
             if (str_contains(strtolower($transcription), strtolower($keyword))) {
                 return new $actionClass();
