@@ -1,32 +1,42 @@
 import { Audio } from 'expo-av';
 
 export const requestMicrophonePermission = async () => {
-  const { granted } = await Audio.requestPermissionsAsync();
-  if (!granted) {
-    throw new Error('Permission to access microphone was denied');
+  try {
+    const { granted } = await Audio.requestPermissionsAsync();
+    return granted;
+  } catch (error) {
+    console.error('Error requesting microphone permission:', error);
+    return false;
   }
 };
 
 export const startRecording = async ({ onRecordingStopped }) => {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  const mediaRecorder = new MediaRecorder(stream);
-  const audioChunks = [];
+  const recording = new Audio.Recording();
 
-  mediaRecorder.ondataavailable = (event) => {
-    audioChunks.push(event.data);
-  };
+  console.log('Starting recording setup!');
+  await Audio.setAudioModeAsync({
+    allowsRecordingIOS: true,
+    playsInSilentModeIOS: true,
+  });  
 
-  mediaRecorder.onstop = () => {
-    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-    onRecordingStopped(audioBlob);
-  };
+  await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+  await recording.startAsync(); // Start recording after preparation
+  console.log('Recording started!');
 
-  mediaRecorder.start();
-  return mediaRecorder;
+  recording.setOnRecordingStatusUpdate(async (status) => {
+    if (status.isDoneRecording) {
+      console.log('Grabación detenida');
+      const audioFile = await recording.getURI(); // Obtener URI del archivo
+      onRecordingStopped(audioFile); // Llamar a la función que maneja el archivo de audio
+    }
+  });
+
+  return recording; // Retornar la grabación
 };
 
-export const checkWebCompatibility = async () => {
-  if (!('MediaRecorder' in window) || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    Alert.alert("El navegador no es compatible con la grabación de audio.");
-  }
+
+
+
+export const checkWebCompatibility = () => {
+  return !!(window.MediaRecorder && navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 };

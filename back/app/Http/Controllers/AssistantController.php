@@ -7,6 +7,7 @@ use App\Services\GetTextService;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 
 class AssistantController extends Controller
@@ -25,8 +26,10 @@ class AssistantController extends Controller
         return $this->getTextService->execute($request);
     }
 
-    public function getAudio(Request $request)
+    public function whisper(Request $request)
     {
+        Log::info('ENTRO LLEGO CON EL AUDIO EN WHISPER');
+        Log::debug(json_encode($request->all()));
         return $this->getAudioService->execute($request);
     }
     //FUNCIONA BIEN LA TRANSCRIPCION
@@ -34,13 +37,12 @@ class AssistantController extends Controller
     // AssistantController.php
     public function __invoke(Request $request)
     {
-        if ($request->hasFile('audio')) {
-            // Procesar audio con Whisper
-            return $this->getAudioService->execute($request);
-        } else {
+        if ($request->has('text')) {
             // Llamar a los actions correspondientes
             return $this->getText($request);
-
+        } else {
+            // Handle the case where the text key doesn't exist
+            return response()->json(['message' => 'No text found'], 400);
         }
     }
 }

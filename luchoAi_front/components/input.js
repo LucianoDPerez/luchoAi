@@ -14,21 +14,24 @@ const Input = ({ onSubmit, onStartRecording, onStopRecording }) => {
         onChangeText={setInputText}
         onKeyPress={(e) => {
           if (e.nativeEvent.key === 'Enter') {      
-            console.log('Estoy enviando desde input... ' + inputText)      
+            console.log('Estoy enviando desde input... ' + inputText);      
             onSubmit(inputText);   
-            setInputText('')         
+            setInputText('');         
           }
         }}
       />
-      <TouchableOpacity onPress={(e) => {
+      <TouchableOpacity onPress={() => {
         onSubmit(inputText);
         setInputText('');
-        }}>
-          <Image source={require("../assets/icons/right-arrow.png")} style={styles.icon} />
+      }}>
+        <Image source={require("../assets/icons/right-arrow.png")} style={styles.icon} />
       </TouchableOpacity>
+      
+      {/* Grabación de audio */}
       <TouchableWithoutFeedback
-        onLongPress={onStartRecording}
-        onPressOut={onStopRecording}>
+        onLongPress={onStartRecording} // Iniciar grabación al mantener presionado
+        onPressOut={onStopRecording} // Detener grabación al soltar
+      >
         <View style={styles.recordButton}>
           <Image source={require("../assets/icons/microphone.png")} style={styles.icon} />
         </View>

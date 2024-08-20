@@ -1,16 +1,20 @@
-import { group } from "console";
-import { getGeminiResponse } from "../components/response";
+const apiUrl = 'http://192.168.0.109:8000/api';
 
 const handleApiResponse = async (response, setListData, inputText) => {
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    setListData((prevList) => [...prevList, {
+      text: 'Hubo un error intenta nuevamente por favor',
+      author: 'api',
+      prompt: 'Hubo un error intenta nuevamente por favor'
+    }]); 
   }
 
-  const apiResponse = await response.json();
-  console.log("API response:", apiResponse);
-
-    console.log('seteo ListData');
-    
+  const apiResponse = await response.json();    
+  setListData((prevList) => [...prevList, {
+    text: apiResponse.prompt,    
+    author: 'user',
+    prompt: apiResponse.prompt
+  }]); 
     setListData((prevList) => [...prevList, {
       text: apiResponse.message,
       categories: apiResponse.categories,
@@ -23,7 +27,7 @@ const handleApiResponse = async (response, setListData, inputText) => {
 
 const sendText = async (inputText, city, setListData) => {
   try {
-    const response = await fetch("http://localhost:8000/api/text", {
+    const response = await fetch(`${apiUrl}/text`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,25 +40,55 @@ const sendText = async (inputText, city, setListData) => {
 
     await handleApiResponse(response, setListData, inputText);
   } catch (error) {
-    console.error("Error sending text:", error);
+    setListData((prevList) => [...prevList, {
+      text: 'Hubo un error intenta nuevamente por favor',
+      author: 'api',
+      prompt: 'Hubo un error intenta nuevamente por favor'
+    }]); 
   }
 };
 
-const sendAudioToWhisper = async (audioBlob, city, setListData) => {
+const sendAudioToWhisper = async (audioFile, city, setListData) => {
   try {
+    // Crear la instancia de FormData
     const formData = new FormData();
 
-    formData.append('audio', audioBlob);
-    formData.append('city', city);
-
-    const response = await fetch('http://localhost:8000/api/whisper', {
-      method: 'POST',
-      body: formData,
+    // Agregar el archivo de audio al FormData
+    formData.append('audio', {
+      uri: audioFile, // URI del archivo de audio
+      type: 'audio/m4a', // Cambia esto según sea necesario
+      name: 'recording.m4a' // Nombre del archivo
     });
 
-    await handleApiResponse(response, setListData, audioBlob);
+    // Agregar otros parámetros que necesites
+    formData.append('city', city);
+
+    // Hacer una solicitud POST a tu API
+    const response = await fetch(`${apiUrl}/whisper`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data', // Este header no es necesario cuando se usa FormData, pero se puede agregar para mayor claridad
+      },
+      body: formData
+    });
+
+    // Verificar la respuesta
+    if (!response.ok) {
+      setListData((prevList) => [...prevList, {
+        text: 'Hubo un error intenta nuevamente por favor',
+        author: 'api',
+        prompt: 'Hubo un error intenta nuevamente por favor'
+      }]); 
+    }
+
+    // Llama a la función de manejo de respuesta
+    await handleApiResponse(response, setListData, audioFile);
   } catch (error) {
-    console.error("Error sending audio:", error);
+    setListData((prevList) => [...prevList, {
+      text: 'Hubo un error intenta nuevamente por favor',
+      author: 'api',
+      prompt: 'Hubo un error intenta nuevamente por favor'
+    }]); 
   }
 };
 

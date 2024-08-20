@@ -14,7 +14,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // routes/api.php
 
-Route::post('/whisper', [AssistantController::class, '__invoke']);
+Route::post('/whisper', [AssistantController::class, 'whisper']);
 Route::post('/text', [AssistantController::class, '__invoke']);
 
 Route::post('/alimentos', [AssistantController::class, '__invoke']);

@@ -3,20 +3,15 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import actionScreenStyles from '../styles/components/actionScreenStyles';
 
-const ActionsScreen = ({ onEnter }) => { 
-
-  // The selectedAction prop is now passed from App.js
-  
+const ActionsScreen = ({ onEnter }) => {     
   return (
     <View style={actionScreenStyles.welcomeContainer}>
-      {/* Mensaje de bienvenida */}
       <View  >
         <Text style={actionScreenStyles.welcomeText}>
           Bienvenido! Puedes hacer lo siguiente:
         </Text>
       </View>
     
-
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginRight: 8 }}>            
                 <TouchableOpacity 
                     onPress={() => {         

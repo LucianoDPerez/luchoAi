@@ -13,23 +13,34 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
+    ],    
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Esta aplicación necesita acceso al micrófono para grabar audio."
+      },
+      "bundleIdentifier": "chatbottest"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/robot.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "RECORD_AUDIO"
+      ],
+      "package": "chatboxtest.com"
     },
     "web": {
       "favicon": "./assets/icons/robot.png"
     },
     "plugins": [
+      "expo-system-ui",
       "expo-router",
       "expo-font"
     ],
-    "permissions": ["location"]
-  }    
+    "permissions": [
+      "location"
+    ]
+  }
 }

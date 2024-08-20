@@ -44,37 +44,37 @@ export default function App() {
     await sendText(text, city, setListData);   
   };
 
-  const handleStartRecording = async () => {
-    try {
-      const recorder = await startRecording({
-        onRecordingStopped: async (audioBlob) => {
-          await sendAudioToWhisper(audioBlob, city, setListData);
-        }
-      });
+  // App.js
+const handleStartRecording = async () => {
+  try {
+    console.log("Iniciando grabación...");
+    const recorder = await startRecording({  
+      onRecordingStopped: async (audioFile) => {
+        //console.log('Grabación detenida. Archivo de audio:', audioFile);
+        //console.log(audioFile); // Aquí deberías ver la URI que se genera.
+        await sendAudioToWhisper(audioFile, city, setListData);  // Llamando a la función para enviar el audio
+      }
+    });
 
-      setMediaRecorder(recorder);
-      setIsRecording(true);
-    } catch (error) {
-      console.error("Error starting the recording:", error);
-    }
-  };
+    setMediaRecorder(recorder);
+    setIsRecording(true);
+  } catch (error) {
+    console.error("Error al iniciar la grabación:", error);
+  }
+};
 
-  const handleStopRecording = () => {
-    if (mediaRecorder) {
-      mediaRecorder.stop();
-      setIsRecording(false);
-    }
-  };
+const handleStopRecording = async () => {
+  console.log("Deteniendo la grabación...");
+  if (mediaRecorder) {
+    await mediaRecorder.stopAndUnloadAsync(); // Detener y liberar
+    console.log("Grabación detenida.");
+    setMediaRecorder(null);
+    setIsRecording(false);
+  } else {
+    console.log("No hay grabación activa.");
+  }
+};
 
-  const sections = listData.reduce((acc, item) => {
-    const section = acc.find((section) => section.title === item.author);
-    if (!section) {
-      acc.push({ title: item.author, data: [item] });
-    } else {
-      section.data.push(item);
-    }
-    return acc;
-  }, []);
 
   return (
     <View style={styles.container}>

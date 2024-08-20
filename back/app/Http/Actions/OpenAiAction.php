@@ -12,6 +12,30 @@ use OpenAI;
 
 class OpenAiAction implements ActionInterface
 {
+    /*   ASI DEVUELVE OPENAI
+{
+  "id": "chatcmpl-9yBAOMGDKxZEZq1SNLdqvscxRRtLJ",
+  "object": "chat.completion",
+  "created": 1724129632,
+  "model": "gpt-4o-mini-2024-07-18",
+  "system_fingerprint": "fp_48196bc67a",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "No tengo la capacidad de acceder a la hora actual."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 13,
+    "completion_tokens": 36,
+    "total_tokens": 49
+  }
+}
+     */
     public function execute(Request $request)
     {
         $data = $request->all();
@@ -31,11 +55,16 @@ class OpenAiAction implements ActionInterface
 
                 $result =($response->toArray());
 
+                Log::info(json_encode($result));
+
                 $responseText = $result['choices'][0]['message']['content'];
 
                 return response()->json([
                     'message' => $responseText,
-                    'found' => true, 'action' => false], 200);
+                    'prompt' => $data['text'],
+                    'found' => true,
+                    'action' => false
+                ], 200);
         }
 
         return response()->json([

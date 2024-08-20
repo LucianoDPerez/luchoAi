@@ -59,5 +59,4 @@ class WeatherAction implements ActionInterface
             'group' => true
         ], 200);
     }
-
 }

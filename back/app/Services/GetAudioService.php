@@ -10,6 +10,11 @@ class GetAudioService
 {
     public function execute(Request $request)
     {
+        $data = $request->all();
+
+        Log::info('AUDIOSERVICE REQUEST ES...');
+        Log::debug(json_encode($data));
+
         $audio = $request->file('audio');
 
         $path = $audio->store('audios', 'public');
