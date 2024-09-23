@@ -43,7 +43,7 @@ class OpenAiAction implements ActionInterface
         Log::info(json_encode($data));
 
         if (array_key_exists('text', $data) && strlen($data['text']) > 0 && array_key_exists('city', $data)) {
-                $key = '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';
+                $key = env('OPENAI_API_KEY');
                 $client = OpenAI::client($key);
 
                 $response = $client->chat()->create([
