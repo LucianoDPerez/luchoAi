@@ -14,7 +14,8 @@ use App\Http\Controllers\Api\AuthController;
 
     // routes/api.php
 
-    Route::post('/whisper', [AssistantController::class, 'whisper']);
+    //Route::post('/whisper', [AssistantController::class, 'whisper']);
+    Route::post('/whisper', [AssistantController::class, 'whisper'])->middleware('validate:audio');
     Route::post('/text', [AssistantController::class, '__invoke']);
 
     Route::post('/alimentos', [AssistantController::class, '__invoke']);

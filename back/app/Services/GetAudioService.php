@@ -10,16 +10,19 @@ class GetAudioService
 {
     public function execute(Request $request)
     {
+        $validatedData = $request->validate([
+            'audio' => 'required|file|mimes:audio/m4a',
+        ]);
+
+        $audio = $validatedData['audio'];
         $data = $request->all();
 
         Log::info('AUDIOSERVICE REQUEST ES...');
         Log::debug(json_encode($data));
 
-        $audio = $request->file('audio');
+        $path = $audio->storePublicly('audios', 'public');
 
-        $path = $audio->store('audios', 'public');
-
-        $fullPath = storage_path('app/public/' . $path);
+        $fullPath = public_path('audios/' . $path);
 
         $command = escapeshellcmd('/usr/local/bin/whisper') . ' ' . escapeshellarg($fullPath) . ' --language Spanish --model base --output_format txt';
 
