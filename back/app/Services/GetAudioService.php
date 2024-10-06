@@ -10,9 +10,9 @@ class GetAudioService
 {
     public function execute(Request $request)
     {
-        //$validatedData = $request->validate([
-        //    'audio' => 'required|file|mimes:audio/m4a',
-        //]);
+        /*$validatedData = $request->validate([
+            'audio' => 'required|file|mimes:audio/m4a',
+        ]);*/
 
         $validatedData = $request->all();
 
@@ -37,6 +37,10 @@ class GetAudioService
             $resultCode = null;
 
             $result = exec($command, $output, $resultCode);
+
+            Log::info('Command output: ' . implode("\n", $output));
+            Log::info('Result code: ' . $resultCode);
+
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
         }
