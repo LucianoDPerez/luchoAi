@@ -26,14 +26,21 @@ class GetAudioService
 
         $fullPath = public_path('/storage/' . $path);
 
+        Log::info('fullpath es... ' . $fullPath);
+
         //EN MI MACOS /Users/luchop/tmp/deepspeech-venv/bin/whisper
         //EN EL SERVER CLOUD /usr/local/bin/whisper
-        $command = escapeshellcmd('/usr/local/bin/whisper') . ' ' . escapeshellarg($fullPath) . ' --language Spanish --model base --output_format txt';
+        try {
+            $command = escapeshellcmd('/usr/local/bin/whisper') . ' ' . escapeshellarg($fullPath) . ' --language Spanish --model base --output_format txt';
 
-        $output = [];
-        $resultCode = null;
+            $output = [];
+            $resultCode = null;
 
-        $result = exec($command, $output, $resultCode);
+            $result = exec($command, $output, $resultCode);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+        }
+
 
         if (!$result && $resultCode !== 0) {
             return response()->json(['message' => 'Error ejecutando el comando de whisper', 'found' => true, 'action' => false], 200);
