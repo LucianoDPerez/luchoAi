@@ -29,7 +29,7 @@ class AssistantController extends Controller
     public function whisper(Request $request)
     {
         Log::info('ENTRO LLEGO CON EL AUDIO EN WHISPER');
-        Log::debug(json_encode($request->all()));
+        Log::info(json_encode($request->all()));
         return $this->getAudioService->execute($request);
     }
     //FUNCIONA BIEN LA TRANSCRIPCION
