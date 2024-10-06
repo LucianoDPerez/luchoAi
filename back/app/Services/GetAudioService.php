@@ -21,7 +21,7 @@ class GetAudioService
 
         $fullPath = storage_path('app/public/' . $path);
 
-        $command = escapeshellcmd('/Users/luchop/tmp/deepspeech-venv/bin/whisper') . ' ' . escapeshellarg($fullPath) . ' --language Spanish --model base --output_format txt';
+        $command = escapeshellcmd('/usr/local/bin/whisper') . ' ' . escapeshellarg($fullPath) . ' --language Spanish --model base --output_format txt';
 
         $output = [];
         $resultCode = null;
