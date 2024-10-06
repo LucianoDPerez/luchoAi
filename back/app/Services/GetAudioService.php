@@ -20,7 +20,7 @@ class GetAudioService
         Log::info('AUDIOSERVICE REQUEST ES...');
         Log::debug(json_encode($data));
 
-        $path = $audio->storePublicly('audios', 'public');
+        $path = $audio->store('audios', 'public');
 
         $fullPath = public_path('audios/' . $path);
 
