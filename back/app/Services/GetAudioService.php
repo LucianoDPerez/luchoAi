@@ -10,13 +10,8 @@ class GetAudioService
 {
     public function execute(Request $request)
     {
-        /*$validatedData = $request->validate([
-            'audio' => 'required|file|mimes:audio/m4a',
-        ]);*/
+        if ($request->hasFile('audio')) $audio = $request->file('audio');
 
-        $validatedData = $request->all();
-
-        $audio = $validatedData['audio'];
         $data = $request->all();
 
         Log::info('AUDIOSERVICE REQUEST ES...');
