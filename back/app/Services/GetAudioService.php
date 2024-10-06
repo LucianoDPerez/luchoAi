@@ -10,9 +10,11 @@ class GetAudioService
 {
     public function execute(Request $request)
     {
-        $validatedData = $request->validate([
-            'audio' => 'required|file|mimes:audio/m4a',
-        ]);
+        //$validatedData = $request->validate([
+        //    'audio' => 'required|file|mimes:audio/m4a',
+        //]);
+
+        $validatedData = $request->all();
 
         $audio = $validatedData['audio'];
         $data = $request->all();
@@ -22,8 +24,10 @@ class GetAudioService
 
         $path = $audio->store('audios', 'public');
 
-        $fullPath = public_path('audios/' . $path);
+        $fullPath = public_path('/storage/' . $path);
 
+        //EN MI MACOS /Users/luchop/tmp/deepspeech-venv/bin/whisper
+        //EN EL SERVER CLOUD /usr/local/bin/whisper
         $command = escapeshellcmd('/usr/local/bin/whisper') . ' ' . escapeshellarg($fullPath) . ' --language Spanish --model base --output_format txt';
 
         $output = [];
@@ -51,5 +55,4 @@ class GetAudioService
             return response()->json(['message' => 'Error ejecutando el comando de whisper', 'found' => true, 'action' => false], 200);
         }
     }
-
 }
