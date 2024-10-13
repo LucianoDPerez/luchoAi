@@ -24,4 +24,4 @@ Route::post('/openai/chat', [OpenAIController::class, 'chat'])->name('openai.cha
 
 Route::get('/maps', [\App\Http\Controllers\GoogleMapsController::class, 'test'])->name('maps.index');
 
-Route::get('/waapi', [\App\Http\Controllers\WhatsappController::class, 'receive']);
+Route::post('/waapi', [\App\Http\Controllers\WhatsappController::class, 'receive']);
