@@ -1,0 +1,57 @@
+{% extends 'admin/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h5><a href="{{ path('app_mk_conn_index') }}">{{ "backend.mk_conn.listing"|trans }}</a> >> {{ "backend.menu.mk_conn"|trans }} </h5>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>{{ "backend.menu.mk_conn"|trans }}</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        {{ form_start(form) }}
+                        <div class="form-group">
+                            {{ form_label(form.host) }}
+                            {{ form_widget(form.host, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.user) }}
+                            {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.pass) }}
+                            {{ form_widget(form.pass, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.port) }}
+                            {{ form_widget(form.port, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a class="btn btn-warning" href="{{ path('app_mk_conn_index') }}">{{ "backend.mk_conn.cancel"|trans }}</a>
+                                <button type="submit" name="valider" class="btn btn-success">{{ "backend.mk_conn.update"|trans }}</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

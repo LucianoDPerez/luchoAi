@@ -1,0 +1,106 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+    prefix: /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
+app_mk_conn:
+    resource: ../src/Controller/MkConnController.php
+    type: annotation
+
+app_mk_conn_index:
+    path: /{_locale}/mk-conn
+    controller: App\Controller\MkConnController::index
+
+app_mk_conn_show:
+    path: /{_locale}/mk-conn/{id}
+    controller: App\Controller\MkConnController::show
+    requirements:
+        id: \d+
+
+app_mk_conn_new:
+    path: /{_locale}/mk-conn/new
+    controller: App\Controller\MkConnController::new
+
+app_mk_conn_edit:
+    path: /{_locale}/mk-conn/{id}/edit
+    controller: App\Controller\MkConnController::edit
+    requirements:
+        id: \d+
+
+app_mk_conn_delete:
+    path: /{_locale}/mk-conn/{id}/delete
+    controller: App\Controller\MkConnController::delete
+    requirements:
+        id: \d+
+        _method: DELETE
+
+app_client_importcsv:
+    path : /{_locale}/client/test
+    controller : App\Controller\ClientController::importCsv
+
+app_client_index:
+    path: /{_locale}/client
+    controller: App\Controller\ClientController::index
+
+app_client_new:
+    path: /{_locale}/client/new
+    controller: App\Controller\ClientController::new
+
+app_client_edit:
+    path: /{_locale}/client/{id}/edit
+    controller: App\Controller\ClientController::edit
+    requirements:
+        id: \d+
+
+app_client_delete:
+    path: /{_locale}/client/{id}/delete
+    controller: App\Controller\ClientController::delete
+    requirements:
+        id: \d+
+        _method: DELETE
+
+app_plan_index:
+    path: /{_locale}/plan
+    controller: App\Controller\PlanController::index
+
+app_plan_new:
+    path: /{_locale}/plan/new
+    controller: App\Controller\PlanController::new
+
+app_plan_edit:
+    path: /{_locale}/plan/{id}/edit
+    controller: App\Controller\PlanController::edit
+    requirements:
+        id: \d+
+
+app_plan_delete:
+    path: /{_locale}/plan/{id}/delete
+    controller: App\Controller\PlanController::delete
+    requirements:
+        id: \d+
+        _method: DELETE
+
+app_invoice_index:
+    path: /{_locale}/invoice
+    controller: App\Controller\InvoiceController::index
+
+app_invoice_new:
+    path: /{_locale}/invoice/new
+    controller: App\Controller\InvoiceController::new
+
+app_invoice_edit:
+    path: /{_locale}/invoice/{id}/edit
+    controller: App\Controller\PlanController::edit
+    requirements:
+        id: \d+
+
+app_invoice_delete:
+    path: /{_locale}/invoice/{id}/delete
+    controller: App\Controller\PlanController::delete
+    requirements:
+        id: \d+
+        _method: DELETE

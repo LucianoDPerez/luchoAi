@@ -1,0 +1,84 @@
+{% extends "admin/bars.html.twig" %}
+{% block contenpage %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card transition-card text-center elegant-border">
+                    <div class="card-body">
+                        <i class="fa fa-wifi fa-3x mb-3"></i>
+                        <h5 class="card-title">Planes</h5>
+                        <p class="card-text">Gestiona los diferentes planes disponibles.</p>
+                        <a href="{# { path('app_planes') }#}" class="btn btn-primary">Ir a Planes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card transition-card text-center elegant-border">
+                    <div class="card-body">
+                        <i class="fa fa-users fa-3x mb-3"></i>
+                        <h5 class="card-title">Clientes</h5>
+                        <p class="card-text">Visualiza y gestiona tus clientes.</p>
+                        <a href="{{ path('app_client_index') }}" class="btn btn-primary">Ir a Clientes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card transition-card text-center elegant-border">
+                    <div class="card-body">
+                        <i class="fa fa-file fa-3x mb-3"></i> <!-- Asegúrate de usar el icono correcto -->
+                        <h5 class="card-title">Facturación</h5>
+                        <p class="card-text">Accede a las opciones de facturación.</p>
+                        <a href="{# { path('app_facturacion') }#}" class="btn btn-primary">Ir a Facturación</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .card {
+            margin-top: 20px; /* Ajusta este valor según sea necesario */
+        }
+
+        .transition-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: #f0f0f0; /* Color de fondo gris claro */
+            border: none; /* Elimina el borde predeterminado */
+            border-radius: 10px; /* Bordes redondeados */
+            overflow: hidden; /* Asegura que el contenido no sobresalga */
+        }
+
+        .elegant-border {
+            /* border: 1px solid  #788a7b ; /* Color del borde elegante */
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Sombra suave */
+        }
+
+        .transition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Un tono más oscuro */
+            color: #fff;
+        }
+
+        /* Estilos para modo oscuro */
+        body.dark-mode .transition-card {
+            background-color: #343a40; /* Fondo oscuro */
+            border-color: #495057; /* Borde oscuro */
+        }
+
+        body.dark-mode .transition-card:hover {
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2); /* Sombra clara en modo oscuro */
+        }
+
+        body.dark-mode .btn-primary:hover {
+            background-color: #0069d9; /* Tono más claro en modo oscuro */
+        }
+    </style>
+{% endblock %}

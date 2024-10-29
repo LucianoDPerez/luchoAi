@@ -1,0 +1,12 @@
+.transition-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #f0f0f0; /* Color de fondo gris claro */
+    border: none; /* Elimina el borde predeterminado */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que el contenido no sobresalga */
+}
+
+.elegant-border {
+    border: 2px solid #007bff; /* Color del borde elegante */
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Sombra suave */
+}

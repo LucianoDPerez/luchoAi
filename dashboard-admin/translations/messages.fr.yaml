@@ -1,0 +1,71 @@
+backend:
+  global:
+    welcome: Bienvenido
+    you_are_logged: Estás conectado como
+    leave_impersonate: Dejar impersonación
+    change_my_password: Cambiar mi contraseña
+    logout: Cerrar sesión
+    error: Error
+    success: Éxito
+    an_unexpected_error: Ha ocurrido un error inesperado
+    must_not_be_empty: No debe estar vacío
+    please_confirm: ¿Confirma la acción?
+    choice_action: Seleccionar una acción
+    no_item_selected: Ningún elemento seleccionado
+  menu:
+    home: Inicio
+    user: Usuario
+    plan: Planes
+    manage: Administrar
+    categories: Categorías
+    blog: Blog
+    history: Historial
+    settings: Ajustes
+    general: General
+    faq: Preguntas frecuentes
+    contact: Contacto
+    inbox: Bandeja de entrada
+    mk_conn: Mk Config Listado
+  role:
+    choice_role: Seleccionar un rol
+  user:
+    listing: Listado
+    user_listing: Lista de usuarios
+    group_actions: Acciones grupales
+    deactivate: Desactivar
+    Activate: Activar
+    delete: Eliminar
+    username: Nombre de usuario
+    email: Correo electrónico
+    name: Nombre completo
+    modifier: Editar
+    status: Estado
+    password: Contraseña
+    cancel: Cancelar
+    register: Registrar
+    changer_password: Cambiar contr
+  mk_conn:
+    host: Host
+    user: Usuario
+    pass: Contraseña
+    port: Puerto
+    list: Listado
+    add: Agregar
+    edit: Editar
+    delete: Eliminar
+    confirm_delete: ¿Estás seguro de eliminar este elemento?
+    cancel: Cancelar
+    save: Guardar
+    close: Cerrar
+    no_data: No se encontraron datos
+    delete_success: El elemento ha sido eliminado exitosamente
+    delete_error: Ocurrió un error al eliminar el elemento
+    add_success: El elemento ha sido agregado exitosamente
+    add_error: Ocurrió un error al agregar el elemento
+    edit_success: El elemento ha sido actualizado exitosamente
+    edit_error: Ocurrió un error al actualizar el elemento
+    listing: Listado
+    actions: Acciones
+    register: Registrar
+    update: Actualizar
+    back_to_list: Volver Listado

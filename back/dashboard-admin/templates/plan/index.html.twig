@@ -1,0 +1,56 @@
+{% extends 'admin/bars.html.twig' %}
+
+{% block contenpage %}
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+              <h5>
+                <a href="{{ path('app_plan_index') }}">Listado Planes</a>
+              </h5>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title"><h2>Listado Planes</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a href="{{ path('app_plan_new') }}" class="btn btn-success">NEW</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <table id="table-index" class="table table-striped table-bordered dataminetables">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Download/Upload</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody> {% for plan in plans %}
+                                <tr>
+                                    <td>{{ plan.name }}</td>
+                                    <td>{{ plan.price }}</td>
+                                    <td>{{ plan.downloadUpload }}</td>
+                                    <td>{{ plan.description }}</td>
+                                    <td>{{ plan.isActive }}</td>
+                                    <td style="display: flex; align-items: center;">
+                                        <a class="btn btn-primary" href="{{ path('app_plan_edit',{"id":plan.id}) }}">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{ path('app_plan_delete', {'id': plan.id}) }}" class="btn btn-danger disable-btn del-link">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr> {% endfor %} </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div> {% endblock %}
